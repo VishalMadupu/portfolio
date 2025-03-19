@@ -1,163 +1,130 @@
 
-/* Custom styles to complement Bootstrap */
-:root {
-  --bs-primary: #4361ee;
-  --bs-primary-rgb: 67, 97, 238;
-  --bs-secondary: #6c757d;
-  --bs-success: #2ecc71;
-  --bs-info: #3498db;
-  --bs-warning: #f39c12;
-  --bs-danger: #e74c3c;
-  --bs-light: #f8f9fa;
-  --bs-dark: #212529;
-  --bs-purple: #8e44ad;
-  --bs-border-radius: 0.5rem;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-.section-title {
-  position: relative;
-  display: inline-block;
-}
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-.section-title::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  width: 80px;
-  height: 3px;
-  background-color: var(--bs-primary);
-  transform: translateX(-50%);
-  border-radius: 3px;
-}
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-.hover-shadow {
-  transition: all 0.3s ease-in-out;
-}
+    --primary: 221.2 83% 53.3%;
+    --primary-foreground: 210 40% 98%;
 
-.hover-shadow:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
-}
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
-.bg-gradient {
-  background: linear-gradient(180deg, rgba(248, 249, 250, 1) 0%, rgba(255, 255, 255, 1) 100%);
-}
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-.bg-gradient-primary {
-  background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.1) 0%, rgba(var(--bs-primary-rgb), 0.05) 100%);
-}
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
-.transition-all {
-  transition: all 0.3s ease;
-}
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-/* Animation classes */
-.fadeInUp {
-  animation: fadeInUp 0.5s ease-out forwards;
-  opacity: 0;
-}
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83% 53.3%;
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-.fadeInDown {
-  animation: fadeInDown 0.5s ease-out forwards;
-  opacity: 0;
-}
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-.fadeInLeft {
-  animation: fadeInLeft 0.5s ease-out forwards;
-  opacity: 0;
-}
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
-.fadeInRight {
-  animation: fadeInRight 0.5s ease-out forwards;
-  opacity: 0;
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
+@layer base {
+  * {
+    @apply border-border;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-.floating {
-  animation: floating 3s ease-in-out infinite;
-}
-
-@keyframes floating {
-  0%, 100% {
-    transform: translateY(0);
+@layer components {
+  .hero-gradient {
+    @apply relative;
   }
-  50% {
-    transform: translateY(-10px);
+  
+  .hero-gradient::before {
+    content: "";
+    @apply absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent -z-10 rounded-3xl;
   }
-}
-
-.pulsing {
-  animation: pulsing 3s ease-in-out infinite;
-}
-
-@keyframes pulsing {
-  0%, 100% {
-    opacity: 1;
+  
+  .section-title {
+    @apply text-3xl font-bold text-center mb-12 relative inline-block;
   }
-  50% {
-    opacity: 0.7;
+  
+  .section-title::after {
+    content: "";
+    @apply absolute bottom-0 left-1/2 w-20 h-1 bg-primary rounded-full -translate-x-1/2 mt-2;
   }
-}
-
-.spinning {
-  animation: spinning 8s linear infinite;
-}
-
-@keyframes spinning {
-  from {
-    transform: rotate(0deg);
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400;
   }
 }
