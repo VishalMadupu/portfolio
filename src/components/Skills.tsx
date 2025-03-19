@@ -27,37 +27,43 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-background to-accent/10">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center mb-16">
-          <h2 className="section-title">Technical Skills</h2>
+    <section id="skills" className="py-5 bg-light">
+      <div className="container">
+        <div className="row justify-content-center mb-5">
+          <div className="col-md-12 text-center">
+            <h2 className="fw-bold mb-4 position-relative d-inline-block section-title">Technical Skills</h2>
+          </div>
         </div>
         
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="row justify-content-center">
           {skillCategories.map((category, index) => (
-            <Card key={index} className="card-hover border-primary/10 animate-fade-up" style={{ animationDelay: `${index * 0.1}s` }}>
-              <CardHeader className="pb-2">
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${category.iconClass}`}>
-                    <span className="text-lg font-bold">{category.category.charAt(0)}</span>
+            <div key={index} className="col-md-6 mb-4">
+              <div className="card h-100 shadow-sm border-primary-subtle card-hover animate__animated animate__fadeInUp" 
+                   style={{ animationDelay: `${index * 0.1}s`, borderRadius: "0.5rem" }}>
+                <div className="card-header border-bottom-0 pb-0">
+                  <div className="d-flex align-items-center gap-3">
+                    <div className={`rounded-circle d-flex align-items-center justify-content-center ${category.iconClass}`} 
+                         style={{ width: "40px", height: "40px" }}>
+                      <span className="fs-5 fw-bold">{category.category.charAt(0)}</span>
+                    </div>
+                    <h5 className="card-title mb-0">{category.category}</h5>
                   </div>
-                  <CardTitle className="text-xl">{category.category}</CardTitle>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, i) => (
-                    <Badge 
-                      key={i} 
-                      variant="outline" 
-                      className="text-sm px-3 py-1 hover:bg-primary/10 transition-colors border-primary/30 hover:border-primary"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
+                <div className="card-body">
+                  <div className="d-flex flex-wrap gap-2">
+                    {category.skills.map((skill, i) => (
+                      <Badge 
+                        key={i} 
+                        variant="outline"
+                        className="badge bg-light text-dark border border-primary-subtle px-3 py-2 fs-6"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>
