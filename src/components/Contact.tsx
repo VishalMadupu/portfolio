@@ -1,88 +1,93 @@
 
+import React from "react";
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-20">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12">Get In Touch</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle>Contact Information</CardTitle>
-              <CardDescription>Feel free to reach out through any of these channels</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-medium">Address</p>
-                  <p className="text-sm text-muted-foreground">Hyderabad, 500010</p>
+    <section id="contact" className="py-5">
+      <Container>
+        <h2 className="display-5 fw-bold text-center mb-5">Get In Touch</h2>
+        <Row className="g-4 justify-content-center" style={{ maxWidth: "1140px", margin: "0 auto" }}>
+          <Col lg={6}>
+            <Card className="h-100 shadow-sm">
+              <Card.Header className="bg-white border-0 pt-4 pb-0">
+                <Card.Title>Contact Information</Card.Title>
+                <Card.Subtitle className="text-muted mb-0">Feel free to reach out through any of these channels</Card.Subtitle>
+              </Card.Header>
+              <Card.Body className="d-flex flex-column gap-4">
+                <div className="d-flex gap-3">
+                  <MapPin className="text-muted flex-shrink-0 mt-1" size={20} />
+                  <div>
+                    <p className="fw-medium mb-1">Address</p>
+                    <p className="text-muted small">Hyderabad, 500010</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Mail className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-medium">Email</p>
-                  <a href="mailto:Vishalreddy354@gmail.com" className="text-sm text-muted-foreground hover:text-primary">
-                    Vishalreddy354@gmail.com
-                  </a>
+                <div className="d-flex gap-3">
+                  <Mail className="text-muted flex-shrink-0 mt-1" size={20} />
+                  <div>
+                    <p className="fw-medium mb-1">Email</p>
+                    <a href="mailto:Vishalreddy354@gmail.com" className="text-muted small text-decoration-none">
+                      Vishalreddy354@gmail.com
+                    </a>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Phone className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
-                <div>
-                  <p className="font-medium">Phone</p>
-                  <a href="tel:+919553852963" className="text-sm text-muted-foreground hover:text-primary">
-                    +91 9553852963
-                  </a>
+                <div className="d-flex gap-3">
+                  <Phone className="text-muted flex-shrink-0 mt-1" size={20} />
+                  <div>
+                    <p className="fw-medium mb-1">Phone</p>
+                    <a href="tel:+919553852963" className="text-muted small text-decoration-none">
+                      +91 9553852963
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </Card.Body>
+            </Card>
+          </Col>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Send Me a Message</CardTitle>
-              <CardDescription>I'll get back to you as soon as possible</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input id="name" placeholder="Your name" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" placeholder="Your email" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" placeholder="Subject" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Your message"
-                    className="min-h-32"
-                  />
-                </div>
-                <Button type="submit" className="w-full">
-                  Send Message
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+          <Col lg={6}>
+            <Card className="h-100 shadow-sm">
+              <Card.Header className="bg-white border-0 pt-4 pb-0">
+                <Card.Title>Send Me a Message</Card.Title>
+                <Card.Subtitle className="text-muted mb-0">I'll get back to you as soon as possible</Card.Subtitle>
+              </Card.Header>
+              <Card.Body>
+                <Form>
+                  <Row className="g-3 mb-3">
+                    <Col sm={6}>
+                      <Form.Group>
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control type="text" placeholder="Your name" />
+                      </Form.Group>
+                    </Col>
+                    <Col sm={6}>
+                      <Form.Group>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" placeholder="Your email" />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Subject</Form.Label>
+                    <Form.Control type="text" placeholder="Subject" />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Message</Form.Label>
+                    <Form.Control 
+                      as="textarea" 
+                      placeholder="Your message" 
+                      style={{ minHeight: "120px" }}
+                    />
+                  </Form.Group>
+                  <Button type="submit" variant="primary" className="w-100">
+                    Send Message
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };

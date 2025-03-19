@@ -1,66 +1,69 @@
 
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React from "react";
+import { Badge, Card, Container, Row, Col } from "react-bootstrap";
 
 const Skills = () => {
   const skillCategories = [
     {
       category: "Front-End",
       skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React-Bootstrap", "SASS"],
-      iconClass: "bg-blue-500/10"
+      iconClass: "bg-primary bg-opacity-10"
     },
     {
       category: "Back-End",
       skills: ["Python"],
-      iconClass: "bg-green-500/10"
+      iconClass: "bg-success bg-opacity-10"
     },
     {
       category: "Tools & Frameworks",
       skills: ["Storybook", "Chromatic", "Next.js", "React.js", "Figma", "Photoshop"],
-      iconClass: "bg-purple-500/10"
+      iconClass: "bg-purple bg-opacity-10"
     },
     {
       category: "Additional Skills",
       skills: ["Windows OS", "Git Version Control", "Responsive Design"],
-      iconClass: "bg-orange-500/10"
+      iconClass: "bg-warning bg-opacity-10"
     },
   ];
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-background to-accent/10">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center mb-16">
-          <h2 className="section-title">Technical Skills</h2>
+    <section id="skills" className="py-5 bg-light">
+      <Container>
+        <div className="text-center mb-5">
+          <h2 className="display-5 fw-bold position-relative d-inline-block pb-2 border-bottom border-primary">
+            Technical Skills
+          </h2>
         </div>
         
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Row className="g-4 justify-content-center">
           {skillCategories.map((category, index) => (
-            <Card key={index} className="card-hover border-primary/10 animate-fade-up" style={{ animationDelay: `${index * 0.1}s` }}>
-              <CardHeader className="pb-2">
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${category.iconClass}`}>
-                    <span className="text-lg font-bold">{category.category.charAt(0)}</span>
+            <Col key={index} xs={12} md={6} className="fadeInUp" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Card className="h-100 shadow-sm border-0 transition-all hover-shadow">
+                <Card.Body>
+                  <div className="d-flex align-items-center mb-3">
+                    <div className={`rounded-circle p-2 me-3 ${category.iconClass}`}>
+                      <span className="fs-5 fw-bold">{category.category.charAt(0)}</span>
+                    </div>
+                    <Card.Title className="mb-0">{category.category}</Card.Title>
                   </div>
-                  <CardTitle className="text-xl">{category.category}</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, i) => (
-                    <Badge 
-                      key={i} 
-                      variant="outline" 
-                      className="text-sm px-3 py-1 hover:bg-primary/10 transition-colors border-primary/30 hover:border-primary"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                  <div className="d-flex flex-wrap gap-2">
+                    {category.skills.map((skill, i) => (
+                      <Badge 
+                        key={i} 
+                        bg="light"
+                        text="dark"
+                        className="px-3 py-2 border"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </div>
-      </div>
+        </Row>
+      </Container>
     </section>
   );
 };
