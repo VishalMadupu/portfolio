@@ -2,6 +2,7 @@
 import { ArrowDown, Code, Cpu, Layout } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import me from "../../public/images/ME.png"
 
 const Hero = () => {
   return (
@@ -21,7 +22,7 @@ const Hero = () => {
             <div className="relative">
               <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary/20 to-transparent rounded-full blur-sm animate-pulse-slow"></div>
               <Avatar className="h-32 w-32 border-4 border-background shadow-lg mb-6 animate-float">
-                <AvatarImage src="/placeholder.svg" alt="Vishal Madupu" />
+                <AvatarImage src={me} alt="Vishal Madupu" />
                 <AvatarFallback className="bg-primary/10 text-primary font-bold text-xl">VM</AvatarFallback>
               </Avatar>
             </div>
