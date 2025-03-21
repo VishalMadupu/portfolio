@@ -54,8 +54,9 @@ const About = () => {
             </p>
             <div className="flex justify-center">
               <Button variant="outline" className="gap-2 shadow-sm hover:shadow-md transition-all border-primary/50">
-                <FileText size={16} />
-                <span>Download Resume</span>
+                {/* <FileText size={16} /> */}
+                <a href="https://drive.google.com/file/d/1vOnD9_et_sVPQFDf44whVWTeraZ_XODG/view?usp=sharing" target="blank"><span>Download Resume</span></a>
+               
               </Button>
             </div>
           </div>
