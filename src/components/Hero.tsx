@@ -2,7 +2,7 @@
 import { ArrowDown, Code, Cpu, Layout } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import me from "../../public/images/ME.png"
+import me from "../images/ME.png"
 
 const Hero = () => {
   return (
