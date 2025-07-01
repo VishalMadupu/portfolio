@@ -49,7 +49,9 @@ app.post("/api/contact", async (req, res) => {
   console.log("📩 Incoming Contact Request:", req.body);
 
   if (!name || !email || !subject || !message) {
-    return res.status(400).json({ success: false, message: "All fields are required!" });
+    return res
+      .status(400)
+      .json({ success: false, message: "All fields are required!" });
   }
 
   try {
@@ -59,7 +61,10 @@ app.post("/api/contact", async (req, res) => {
 
     // Send email
     const mailOptions = {
-      from: `"${name}" <${email}>`,
+
+      from: `"${name}" <${process.env.EMAIL_USER}>`, // ✅ verified domain
+      replyTo: email, // ✅ reply still goes to user
+
       to: process.env.EMAIL_USER,
       subject: `New Contact Request: ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
@@ -68,7 +73,9 @@ app.post("/api/contact", async (req, res) => {
     const info = await transporter.sendMail(mailOptions);
     console.log("✅ Email Sent:", info.response);
 
-    res.status(200).json({ success: true, message: "Contact saved and email sent!" });
+    res
+      .status(200)
+      .json({ success: true, message: "Contact saved and email sent!" });
   } catch (error) {
     console.error("❌ Error in submission:", error.message);
     res.status(500).json({ success: false, message: error.message });
