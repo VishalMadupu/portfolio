@@ -1,9 +1,29 @@
-require("dotenv").config();
+require("dotenv").config(); // Ensure dotenv is loaded before any other imports
+// Import necessary modules
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const Contact = require("./models/contact");
+
+
+
+const isProduction = process.env.NODE_ENV === "production";
+
+const mongoURI = process.env.MONGO_URI;
+
+if (!mongoURI) {
+  console.error("❌ MONGO_URI is not defined. Check your environment variables.");
+  process.exit(1);
+}
+
+mongoose
+  .connect(mongoURI)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
+
+// Port logic
+// const PORT = process.env.PORT || 10000;
 
 const app = express();
 app.use(express.json());
@@ -62,5 +82,11 @@ app.post("/api/contact", async (req, res) => {
   
 
 // Start Server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+const PORT = process.env.PORT || 10000;
+// app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  if (isProduction && process.env.RENDER_URL) {
+    console.log(`🌐 Production URL: ${process.env.RENDER_URL}`);
+  }
+});
