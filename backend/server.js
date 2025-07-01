@@ -61,11 +61,9 @@ app.post("/api/contact", async (req, res) => {
 
     // Send email
     const mailOptions = {
-
       from: `"${name}" <${process.env.EMAIL_USER}>`, // ✅ verified domain
-      replyTo: email, // ✅ reply still goes to user
-
-      to: process.env.EMAIL_USER,
+      to: process.env.RECEIVER_EMAIL || process.env.EMAIL_USER, // Your email inbox
+      replyTo: email, // So you can click "Reply" to message Mahesh
       subject: `New Contact Request: ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     };
