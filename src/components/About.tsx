@@ -55,7 +55,7 @@ const About = () => {
             <div className="flex justify-center">
               <Button variant="outline" className="gap-2 shadow-sm hover:shadow-md transition-all border-primary/50">
                 {/* <FileText size={16} /> */}
-                <a href="https://drive.google.com/file/d/1OOlPL8IRtkzSDS9XlRKyf9rdWt8Rxrx1/view?usp=sharing" target="blank"><span>Download Resume</span></a>
+                <a href="https://drive.google.com/file/d/1ZvQZzsuoazS5mB4WIobu889e2GEyM5hK/view?usp=sharing" target="blank"><span>Download Resume</span></a>
                
               </Button>
             </div>
