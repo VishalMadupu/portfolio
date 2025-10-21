@@ -47,7 +47,7 @@ const About = () => {
           <div className="bg-card rounded-xl p-8 shadow-md border transition-all hover:shadow-lg hero-gradient animate-fade-up">
             <h3 className="text-xl font-semibold mb-4">Objective</h3>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              As a passionate Web Developer, I specialize in front-end and back-end technologies with a focus on 
+              As a passionate Full Stack Developer, I specialize in front-end and back-end technologies with a focus on 
               building scalable, user-friendly, and responsive web applications. My expertise lies in creating dynamic and 
               visually appealing interfaces, optimizing web performance, and contributing to innovative, forward-thinking 
               projects.
@@ -55,7 +55,7 @@ const About = () => {
             <div className="flex justify-center">
               <Button variant="outline" className="gap-2 shadow-sm hover:shadow-md transition-all border-primary/50">
                 {/* <FileText size={16} /> */}
-                <a href="https://drive.google.com/file/d/1vOnD9_et_sVPQFDf44whVWTeraZ_XODG/view?usp=sharing" target="blank"><span>Download Resume</span></a>
+                <a href="https://drive.google.com/file/d/1ZvQZzsuoazS5mB4WIobu889e2GEyM5hK/view?usp=sharing" target="blank"><span>Download Resume</span></a>
                
               </Button>
             </div>
