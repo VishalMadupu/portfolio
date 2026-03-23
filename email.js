@@ -26,6 +26,7 @@ export async function sendContactFormEmail({ name, email, message }) {
       from_name: name,
       from_email: email,
       message: message,
+      email: "Vishalreddy354@gmail.com", // Recipient email for template
     },
   });
 }
