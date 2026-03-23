@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { sendContactFormEmail } from "../../email";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +21,8 @@ const Contact: React.FC = () => {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ success?: boolean; message?: string }>(null);
 
   const validateEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
@@ -33,40 +36,34 @@ const Contact: React.FC = () => {
     setFormData((s) => ({ ...s, [e.target.id]: e.target.value }));
   };
 
-  // Build Gmail compose URL
-  const buildGmailUrl = (to: string, subject: string, body: string) =>
-    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-      to
-    )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-  // Open Gmail compose with form details
-  const openGmailCompose = () => {
-    const recipient = "Vishalreddy354@gmail.com";
-    const subjectLine = `Portfolio Contact: ${formData.subject || "No subject"}`;
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-
-    const gmailUrl = buildGmailUrl(recipient, subjectLine, body);
-
-    try {
-      window.open(gmailUrl, "_blank", "noopener,noreferrer");
-    } catch (err) {
-      console.error("Failed to open Gmail:", err);
-      // Fallback to mailto if Gmail fails to open
-      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(body)}`;
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValid()) {
       alert("Please complete the form with a valid email and message (min 6 chars).");
       return;
     }
 
-    openGmailCompose();
-    
-    // Reset form after opening Gmail
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const result = await sendContactFormEmail({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      });
+
+      if (result.success) {
+        setSubmitStatus({ success: true, message: "Message sent successfully!" });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setSubmitStatus({ success: false, message: result.error || "Failed to send message" });
+      }
+    } catch (error) {
+      setSubmitStatus({ success: false, message: "An error occurred. Please try again." });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -102,11 +99,21 @@ const Contact: React.FC = () => {
           <Card>
             <CardHeader>
               <CardTitle>Send Me a Message</CardTitle>
-              <CardDescription>Your details will be pre-filled in a new Gmail compose window</CardDescription>
+              <CardDescription>Fill out the form and I'll get back to you</CardDescription>
             </CardHeader>
 
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
+                {submitStatus && (
+                  <div className={`p-3 rounded-md text-sm ${
+                    submitStatus.success 
+                      ? "bg-green-500/10 text-green-600 border border-green-500/30" 
+                      : "bg-red-500/10 text-red-600 border border-red-500/30"
+                  }`}>
+                    {submitStatus.message}
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField id="name" label="Name" type="text" value={formData.name} onChange={handleChange} />
                   <FormField id="email" label="Email" type="email" value={formData.email} onChange={handleChange} />
@@ -125,8 +132,8 @@ const Contact: React.FC = () => {
                   />
                 </div>
 
-                <Button type="submit" className="w-full">
-                  Open Gmail Compose
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </CardContent>
