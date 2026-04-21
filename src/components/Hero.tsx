@@ -8,12 +8,15 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import me from "../images/ME.png";
+import me from "../images/professional linkedinprofile.jpg";
 import { heroStats, siteConfig } from "@/data/portfolio";
 
 const Hero = () => {
   return (
-    <section id="home" className="relative overflow-hidden pb-16 pt-8 sm:pb-24 sm:pt-12">
+    <section
+      id="home"
+      className="relative overflow-hidden pb-16 pt-8 sm:pb-24 sm:pt-12"
+    >
       <div className="absolute inset-0 -z-10">
         <div className="absolute left-[-12rem] top-[-6rem] h-[24rem] w-[24rem] rounded-full bg-[#f97316]/18 blur-3xl" />
         <div className="absolute right-[-8rem] top-[6rem] h-[22rem] w-[22rem] rounded-full bg-[#0ea5e9]/16 blur-3xl" />
@@ -36,8 +39,8 @@ const Hero = () => {
                 Building interfaces that feel sharp and systems that hold up.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
-                I&apos;m {siteConfig.name}, a {siteConfig.role} based in {siteConfig.location}.{" "}
-                {siteConfig.shortBio}
+                I&apos;m {siteConfig.name}, a {siteConfig.role} based in{" "}
+                {siteConfig.location}. {siteConfig.shortBio}
               </p>
             </div>
 
@@ -73,14 +76,19 @@ const Hero = () => {
                   <p className="font-display text-3xl font-semibold text-slate-950">
                     {stat.value}
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{stat.label}</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
 
             <div className="mt-10 flex items-center gap-3 text-sm text-slate-600">
               <MapPin className="h-4 w-4 text-[#0f766e]" />
-              <span>Available for product engineering, UI systems, and web platform work.</span>
+              <span>
+                Available for product engineering, UI systems, and web platform
+                work.
+              </span>
             </div>
           </div>
 
@@ -94,7 +102,11 @@ const Hero = () => {
                 </div>
 
                 <Avatar className="mx-auto h-64 w-64 rounded-[2rem] border border-white/80 shadow-[0_24px_60px_rgba(15,23,42,0.18)] sm:h-72 sm:w-72">
-                  <AvatarImage src={me} alt={siteConfig.name} className="object-cover" />
+                  <AvatarImage
+                    src={me}
+                    alt={siteConfig.name}
+                    className="object-cover"
+                  />
                   <AvatarFallback className="bg-slate-100 font-display text-5xl text-slate-700">
                     VM
                   </AvatarFallback>
@@ -108,21 +120,29 @@ const Hero = () => {
                       </span>
                       <div>
                         <p className="text-sm text-slate-500">Current role</p>
-                        <p className="font-medium">Software Engineer at ISCS Technologies</p>
+                        <p className="font-medium">
+                          Software Engineer at ISCS Technologies
+                        </p>
                       </div>
                     </div>
                   </div>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div className="rounded-[1.5rem] bg-slate-950 p-4 text-white">
-                      <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Strength</p>
+                      <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                        Strength
+                      </p>
                       <p className="mt-2 text-sm leading-6">
-                        Reusable frontend systems with production-focused execution.
+                        Reusable frontend systems with production-focused
+                        execution.
                       </p>
                     </div>
                     <div className="rounded-[1.5rem] bg-[#ecfeff] p-4 text-slate-900">
-                      <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Focus</p>
+                      <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
+                        Focus
+                      </p>
                       <p className="mt-2 text-sm leading-6">
-                        SaaS interfaces, internal tools, and workflow-driven products.
+                        SaaS interfaces, internal tools, and workflow-driven
+                        products.
                       </p>
                     </div>
                   </div>
