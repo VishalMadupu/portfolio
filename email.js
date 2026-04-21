@@ -1,8 +1,17 @@
 import emailjs from '@emailjs/browser';
 
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_FALLBACK_CONFIG = {
+  publicKey: "IVHVlMBkt3UF2lY8h",
+  serviceId: "service_qsz7tir",
+  templateId: "template_7871fgd",
+};
+
+const EMAILJS_PUBLIC_KEY =
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY || EMAILJS_FALLBACK_CONFIG.publicKey;
+const EMAILJS_SERVICE_ID =
+  import.meta.env.VITE_EMAILJS_SERVICE_ID || EMAILJS_FALLBACK_CONFIG.serviceId;
+const EMAILJS_TEMPLATE_ID =
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID || EMAILJS_FALLBACK_CONFIG.templateId;
 
 if (EMAILJS_PUBLIC_KEY) {
   emailjs.init({
