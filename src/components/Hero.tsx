@@ -24,7 +24,7 @@ const Hero = () => {
         <div className="grid min-h-[calc(100vh-7rem)] items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="animate-fade-up">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/75 px-4 py-2 text-sm font-medium text-slate-700 shadow-[0_16px_50px_rgba(15,23,42,0.08)] backdrop-blur">
-              <Sparkles className="h-4 w-4 text-[#f97316]" />
+              {/* <Sparkles className="h-4 w-4 text-[#f97316]" /> */}
               <span>{siteConfig.availability}</span>
             </div>
 

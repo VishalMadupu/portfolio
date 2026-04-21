@@ -17,6 +17,29 @@ const CONTACT_FIELD_LIMITS = {
   message: 2000,
 };
 
+function getErrorMessage(error) {
+  if (!error) {
+    return "Unable to send the message right now. Please try again later or email directly.";
+  }
+
+  if (typeof error === "string") {
+    return error;
+  }
+
+  const candidate =
+    error?.text ||
+    error?.message ||
+    error?.statusText ||
+    error?.response?.data?.message ||
+    error?.responseText;
+
+  if (typeof candidate === "string" && candidate.trim()) {
+    return candidate.trim();
+  }
+
+  return "Unable to send the message right now. Please try again later or email directly.";
+}
+
 function normalizeSingleLine(value, maxLength) {
   return value.replace(/[\r\n\t]+/g, " ").trim().slice(0, maxLength);
 }
@@ -61,9 +84,14 @@ export async function sendEmail({ templateId, serviceId, params }) {
     return { success: true, messageId: result.text };
   } catch (error) {
     console.error('Email delivery failed', error);
+    const detailedMessage = getErrorMessage(error);
+
     return {
       success: false,
-      error: "Unable to send the message right now. Please try again later or email directly.",
+      error:
+        import.meta.env.DEV
+          ? `EmailJS request failed: ${detailedMessage}`
+          : "Unable to send the message right now. Please try again later or email directly.",
     };
   }
 }
@@ -78,6 +106,7 @@ export async function sendContactFormEmail({ name, email, subject = "", message 
     params: {
       from_name: safeName,
       from_email: safeEmail,
+      reply_to: safeEmail,
       subject: safeSubject,
       message: safeMessage,
       email: "Vishalreddy354@gmail.com", // Recipient email for template

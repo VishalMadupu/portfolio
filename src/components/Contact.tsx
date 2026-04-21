@@ -18,7 +18,7 @@ import SectionIntro from "@/components/SectionIntro";
 import { contactCards, siteConfig } from "@/data/portfolio";
 
 const Contact: React.FC = () => {
-  const formStartedAt = React.useRef(Date.now());
+  const formStartedAt = React.useRef<number | null>(null);
   const lastSubmittedAt = React.useRef(0);
   const [formData, setFormData] = useState({
     name: "",
@@ -31,6 +31,7 @@ const Contact: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<{
     success?: boolean;
     message?: string;
+    fallbackHref?: string;
   } | null>(null);
   const FIELD_LIMITS = {
     name: 80,
@@ -41,6 +42,18 @@ const Contact: React.FC = () => {
 
   const validateEmail = (email: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+  const buildMailtoFallback = () => {
+    const trimmedSubject = formData.subject.trim() || "Portfolio Contact";
+    const body = [
+      `Name: ${formData.name.trim()}`,
+      `Email: ${formData.email.trim()}`,
+      "",
+      formData.message.trim(),
+    ].join("\n");
+
+    return `mailto:${siteConfig.email}?subject=${encodeURIComponent(trimmedSubject)}&body=${encodeURIComponent(body)}`;
+  };
 
   const isValid = () =>
     formData.name.trim().length >= 2 &&
@@ -56,6 +69,10 @@ const Contact: React.FC = () => {
   ) => {
     const { id, value } = e.target;
     const limit = FIELD_LIMITS[id as keyof typeof FIELD_LIMITS];
+
+    if (id !== "website" && formStartedAt.current === null) {
+      formStartedAt.current = Date.now();
+    }
 
     setFormData((current) => ({
       ...current,
@@ -75,18 +92,20 @@ const Contact: React.FC = () => {
     }
 
     const now = Date.now();
-    if (now - formStartedAt.current < 3000) {
+    if (formStartedAt.current !== null && now - formStartedAt.current < 1500) {
       setSubmitStatus({
         success: false,
         message: "Please take a moment to review your message before sending.",
+        fallbackHref: buildMailtoFallback(),
       });
       return;
     }
 
-    if (now - lastSubmittedAt.current < 30000) {
+    if (now - lastSubmittedAt.current < 10000) {
       setSubmitStatus({
         success: false,
-        message: "Please wait a bit before sending another message.",
+        message: "Please wait a few seconds before sending another message.",
+        fallbackHref: buildMailtoFallback(),
       });
       return;
     }
@@ -95,6 +114,7 @@ const Contact: React.FC = () => {
       setSubmitStatus({
         success: false,
         message: "Please complete the form with a valid email and a message of at least 10 characters.",
+        fallbackHref: buildMailtoFallback(),
       });
       return;
     }
@@ -114,17 +134,19 @@ const Contact: React.FC = () => {
         lastSubmittedAt.current = now;
         setSubmitStatus({ success: true, message: "Message sent successfully." });
         setFormData({ name: "", email: "", subject: "", message: "", website: "" });
-        formStartedAt.current = Date.now();
+        formStartedAt.current = null;
       } else {
         setSubmitStatus({
           success: false,
           message: result.error || "Failed to send message.",
+          fallbackHref: buildMailtoFallback(),
         });
       }
     } catch (error) {
       setSubmitStatus({
         success: false,
         message: "An error occurred. Please try again.",
+        fallbackHref: buildMailtoFallback(),
       });
     } finally {
       setIsSubmitting(false);
@@ -216,6 +238,16 @@ const Contact: React.FC = () => {
                     }`}
                   >
                     {submitStatus.message}
+                    {!submitStatus.success && submitStatus.fallbackHref ? (
+                      <div className="mt-3">
+                        <a
+                          href={submitStatus.fallbackHref}
+                          className="font-medium underline underline-offset-4"
+                        >
+                          Send with your email app instead
+                        </a>
+                      </div>
+                    ) : null}
                   </div>
                 )}
 
