@@ -1,56 +1,46 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import SectionIntro from "@/components/SectionIntro";
+import { skillGroups } from "@/data/portfolio";
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      category: "Front-End",
-      skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React-Bootstrap", "SASS"],
-      iconClass: "bg-blue-500/10"
-    },
-    {
-      category: "Back-End",
-      skills: ["Python"],
-      iconClass: "bg-green-500/10"
-    },
-    {
-      category: "Tools & Frameworks",
-      skills: ["Storybook", "Chromatic", "Next.js", "React.js", "Figma", "Photoshop"],
-      iconClass: "bg-purple-500/10"
-    },
-    {
-      category: "Additional Skills",
-      skills: ["Windows OS", "Git Version Control", "Responsive Design"],
-      iconClass: "bg-orange-500/10"
-    },
-  ];
-
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-background to-accent/10">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center mb-16">
-          <h2 className="section-title">Technical Skills</h2>
-        </div>
-        
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          {skillCategories.map((category, index) => (
-            <Card key={index} className="card-hover border-primary/10 animate-fade-up" style={{ animationDelay: `${index * 0.1}s` }}>
-              <CardHeader className="pb-2">
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${category.iconClass}`}>
-                    <span className="text-lg font-bold">{category.category.charAt(0)}</span>
+    <section id="skills" className="py-20 sm:py-28">
+      <div className="container px-4">
+        <SectionIntro
+          eyebrow="Capabilities"
+          title="A stack shaped by frontend quality and delivery speed."
+          description="I’m strongest where product UX and implementation detail meet. These are the tools and working patterns I use most often."
+        />
+
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
+          {skillGroups.map((group) => (
+            <Card
+              key={group.title}
+              className="card-hover border-white/70 bg-white/80 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur"
+            >
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-base font-semibold text-white">
+                    {group.title.charAt(0)}
                   </div>
-                  <CardTitle className="text-xl">{category.category}</CardTitle>
+                  <div>
+                    <CardTitle className="font-display text-2xl tracking-tight text-slate-950">
+                      {group.title}
+                    </CardTitle>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                      {group.description}
+                    </p>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, i) => (
-                    <Badge 
-                      key={i} 
-                      variant="outline" 
-                      className="text-sm px-3 py-1 hover:bg-primary/10 transition-colors border-primary/30 hover:border-primary"
+                <div className="flex flex-wrap gap-3">
+                  {group.skills.map((skill) => (
+                    <Badge
+                      key={skill}
+                      variant="outline"
+                      className="rounded-full border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-700 hover:bg-slate-100"
                     >
                       {skill}
                     </Badge>

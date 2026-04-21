@@ -1,64 +1,81 @@
-
-import { FileText, Briefcase, Award, Lightbulb } from "lucide-react";
+import { ArrowUpRight, Layers3, Rocket, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import SectionIntro from "@/components/SectionIntro";
+import { focusAreas, highlights, siteConfig } from "@/data/portfolio";
 
 const About = () => {
-  const qualities = [
-    { 
-      icon: <Briefcase className="h-8 w-8 text-primary" />, 
-      title: "Professional",
-      description: "Dedicated to delivering high-quality work that exceeds expectations" 
-    },
-    { 
-      icon: <Lightbulb className="h-8 w-8 text-primary" />, 
-      title: "Creative",
-      description: "Innovative approach to problem-solving and design challenges" 
-    },
-    { 
-      icon: <Award className="h-8 w-8 text-primary" />, 
-      title: "Skilled",
-      description: "Proficient in modern web development technologies and best practices" 
-    },
+  const icons = [
+    <Rocket className="h-5 w-5" />,
+    <Layers3 className="h-5 w-5" />,
+    <Workflow className="h-5 w-5" />,
   ];
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-b from-accent/10 to-background">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center mb-16">
-          <h2 className="section-title">About Me</h2>
-        </div>
-        
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {qualities.map((quality, index) => (
-              <Card key={index} className="card-hover border-none bg-card/50 backdrop-blur-sm">
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  <div className="mb-4 p-3 rounded-full bg-primary/10 animate-fade-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                    {quality.icon}
+    <section id="about" className="py-20 sm:py-28">
+      <div className="container px-4">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="space-y-8">
+            <SectionIntro
+              eyebrow="About"
+              title="I build modern web experiences with product discipline."
+              description="My work sits between polished frontend implementation and practical full stack delivery. I care about components, responsiveness, performance, and the details that make a product feel finished."
+            />
+
+            <div className="rounded-[2rem] border border-white/70 bg-white/70 p-7 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur">
+              <p className="text-sm uppercase tracking-[0.24em] text-slate-500">
+                What I&apos;m aiming for
+              </p>
+              <p className="mt-4 text-base leading-8 text-slate-700">
+                As a developer, I want to keep building systems that are clean to
+                maintain and clear to use. That means thoughtful component design,
+                reliable integrations, and interfaces that help users move faster.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                {focusAreas.map((area) => (
+                  <span
+                    key={area}
+                    className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-700"
+                  >
+                    {area}
+                  </span>
+                ))}
+              </div>
+
+              <Button
+                asChild
+                className="mt-8 rounded-full bg-slate-950 px-6 text-white hover:bg-slate-800"
+              >
+                <a href={siteConfig.resumeUrl} target="_blank" rel="noreferrer">
+                  Open Resume
+                  <ArrowUpRight />
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {highlights.map((item, index) => (
+              <Card
+                key={item.title}
+                className={`card-hover border-white/70 bg-white/80 shadow-[0_22px_60px_rgba(15,23,42,0.08)] backdrop-blur ${
+                  index === 0 ? "md:col-span-2 xl:col-span-1" : ""
+                }`}
+              >
+                <CardContent className="p-6">
+                  <div className="mb-5 inline-flex rounded-2xl bg-slate-950 p-3 text-white">
+                    {icons[index]}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{quality.title}</h3>
-                  <p className="text-muted-foreground text-sm">{quality.description}</p>
+                  <h3 className="font-display text-xl tracking-tight text-slate-950">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    {item.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}
-          </div>
-          
-          <div className="bg-card rounded-xl p-8 shadow-md border transition-all hover:shadow-lg hero-gradient animate-fade-up">
-            <h3 className="text-xl font-semibold mb-4">Objective</h3>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
-              As a passionate Full Stack Developer, I specialize in front-end and back-end technologies with a focus on 
-              building scalable, user-friendly, and responsive web applications. My expertise lies in creating dynamic and 
-              visually appealing interfaces, optimizing web performance, and contributing to innovative, forward-thinking 
-              projects.
-            </p>
-            <div className="flex justify-center">
-              <Button variant="outline" className="gap-2 shadow-sm hover:shadow-md transition-all border-primary/50">
-                {/* <FileText size={16} /> */}
-                <a href="https://drive.google.com/file/d/1ZvQZzsuoazS5mB4WIobu889e2GEyM5hK/view?usp=sharing" target="blank"><span>Download Resume</span></a>
-               
-              </Button>
-            </div>
           </div>
         </div>
       </div>

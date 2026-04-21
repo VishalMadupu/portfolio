@@ -1,65 +1,55 @@
-import { CalendarDays, Briefcase, Building2 } from "lucide-react";
+import { ArrowUpRight, CalendarDays } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import SectionIntro from "@/components/SectionIntro";
+import { experiences } from "@/data/portfolio";
 
 const Experience = () => {
-  const experiences = [
-    {
-      role: "Software Engineer",
-      company: "ISCS Technologies Private Limited",
-      period: "Apr 2025 – Present",
-      icon: <Building2 className="h-8 w-8" />,
-      details: [
-        "Developing and maintaining scalable web applications using modern technologies.",
-        "Collaborating with cross-functional teams to design and implement software solutions.",
-        "Contributing to code reviews, architecture decisions, and continuous improvement initiatives.",
-      ],
-    },
-    {
-      role: "Associate Developer",
-      company: "Busybrains",
-      period: "Oct 2024 – Apr 2025",
-      icon: <Briefcase className="h-8 w-8" />,
-      details: [
-        "Built and maintained web applications as part of a collaborative development team.",
-        "Worked on front-end and back-end features to deliver end-to-end solutions.",
-        "Participated in agile development processes including sprint planning and daily standups.",
-      ],
-    },
-  ];
-
   return (
-    <section id="experience" className="py-20">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12">Experience</h2>
-        <div className="max-w-3xl mx-auto space-y-6">
+    <section id="experience" className="py-20 sm:py-28">
+      <div className="container px-4">
+        <SectionIntro
+          eyebrow="Experience"
+          title="Hands-on work across product teams and production systems."
+          description="My recent experience is centered on building and improving real applications, with a strong mix of implementation detail, team collaboration, and practical problem-solving."
+        />
+
+        <div className="mt-14 space-y-6">
           {experiences.map((exp, index) => (
             <Card
-              key={index}
-              className="relative overflow-hidden border-l-4 border-l-primary/60 hover:shadow-lg transition-shadow duration-300"
+              key={exp.role}
+              className="relative overflow-hidden border-white/70 bg-white/82 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur"
             >
-              <CardHeader className="flex flex-row items-start gap-4 pb-2">
-                <div className="mt-1 rounded-full p-2 bg-primary/10 text-primary">
-                  {exp.icon}
-                </div>
+              <div className="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-[#f97316] via-[#fb923c] to-[#0ea5e9]" />
+              <CardHeader className="gap-5 pb-0 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <CardTitle className="text-xl">{exp.role}</CardTitle>
-                  <p className="text-sm text-muted-foreground mt-1 font-medium">
-                    {exp.company}
+                  <p className="text-sm uppercase tracking-[0.22em] text-slate-500">
+                    Role 0{index + 1}
                   </p>
+                  <CardTitle className="mt-3 font-display text-3xl tracking-tight text-slate-950">
+                    {exp.role}
+                  </CardTitle>
+                  <p className="mt-2 text-base font-medium text-slate-700">{exp.company}</p>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center text-sm text-muted-foreground mb-3">
+                <div className="flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-600">
                   <CalendarDays className="mr-2 h-4 w-4" />
                   <span>{exp.period}</span>
                 </div>
-                {exp.details && (
-                  <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground mt-2">
-                    {exp.details.map((detail, i) => (
-                      <li key={i}>{detail}</li>
-                    ))}
-                  </ul>
-                )}
+              </CardHeader>
+              <CardContent className="pt-6">
+                <p className="max-w-3xl text-base leading-8 text-slate-600">
+                  {exp.summary}
+                </p>
+                <div className="mt-7 grid gap-3">
+                  {exp.achievements.map((detail) => (
+                    <div
+                      key={detail}
+                      className="flex items-start gap-3 rounded-[1.35rem] border border-slate-200/70 bg-white p-4"
+                    >
+                      <ArrowUpRight className="mt-1 h-4 w-4 text-[#0f766e]" />
+                      <p className="text-sm leading-7 text-slate-600">{detail}</p>
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           ))}
